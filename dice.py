@@ -39,6 +39,4 @@ def XdY(X, dY, r_lim=7776, print_spam=False): # count for dice qnty, d_name for 
     print("Runtime Error; runtime in excess of limit ("+str(run)+")")
     return o_list # if while loop didnt return results
 
-def calc_dmg(i_list):
-    pass
 
