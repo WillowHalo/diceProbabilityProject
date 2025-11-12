@@ -9,28 +9,33 @@ def advance(inp, base, num=1):
     return out
 
 def striping(i_list, typ="dmg"):
-    out = []
-    y = []
+    out = {}
     tot = 0
     key = {"dmg":1, "sp":3, "crit":5}
     for item in i_list:
         d = item.split("-")[key[typ]]
-        y.append(i_list[item])
+        y = i_list[item]
         tot += i_list[item]
-        out.append(d)
-    return out, y, tot
+        out.update({d:y})
+    return out, tot
 
-base = XdY(5, d(6))
+base = XdY(4, d(6))
 sys = round_start(base, sp=11)
-sys = advance(sys, base, 0)
-data, y, pri = striping(sys)
-real_y = []
-for val in y:
-    real_y.append(val/pri)
+sys = advance(sys, base, 1)
+raw_data, pri = striping(sys)
+data = {}
+for name in raw_data:
+    data.update({int(name):raw_data[name]/pri})
 
+data = dict(sorted(data.items()))
+
+avgdmg = 0
+for x, y in data.items():
+    avgdmg += x*y
+print(avgdmg)
 print(pri)
 
-plot.bar(data, real_y, color="#bfafff")
+plot.bar(data.keys(), data.values(), color="#bfafff")
 plot.title("title")
 plot.xticks(rotation=270)
 
