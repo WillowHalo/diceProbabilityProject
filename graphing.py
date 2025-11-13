@@ -19,9 +19,9 @@ def striping(i_list, typ="dmg"):
         out.update({d:y})
     return out, tot
 
-base = XdY(4, d(6))
+base = XdY(5, d(6))
 sys = round_start(base, sp=11)
-sys = advance(sys, base, 1)
+sys = advance(sys, base, 0)
 raw_data, pri = striping(sys)
 data = {}
 for name in raw_data:
