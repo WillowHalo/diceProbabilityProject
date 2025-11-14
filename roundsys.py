@@ -25,7 +25,8 @@ def round_add(i_prior, i_list, abl=1, crit_num=2, crit_dmg=5):
             crit = int(dice.count(max_val) >= crit_num)
             dmg = max(sum(dice)-sp, 0)
             s = "dmg-{}".format(dmg + (crit_dmg * crit) + p_dmg) # damage plus crit plus prior damage
-            s += "-sp-{}".format(sp - (abl*int(dmg!=0))) # check remaining SP with abblation
+            sp = sp - (abl*int(dmg!=0)) # add abblation
+            s += "-sp-{}".format(max(0, sp)) # enshure that sp isn't negative
             s += "-C-{}".format(crit+c) # count num of crits
             out[s] = out.get(s, 0)+1
     return out
